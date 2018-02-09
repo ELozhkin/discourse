@@ -35,6 +35,10 @@ class CategoryTagStat < ActiveRecord::Base
     topic_moved(topic, nil, topic.category_id)
   end
 
+  def self.ensure_consistency!
+    self.update_topic_counts
+  end
+
   # Recalculate all topic counts if they got out of sync
   def self.update_topic_counts
     CategoryTagStat.exec_sql <<~SQL
