@@ -39,7 +39,7 @@ class CategoryTagStat < ActiveRecord::Base
   def self.update_topic_counts
     CategoryTagStat.exec_sql <<~SQL
       UPDATE category_tag_stats stats
-      SET stats.topic_count = x.topic_count
+      SET topic_count = x.topic_count
       FROM (
         SELECT COUNT(topics.id) AS topic_count,
                tags.id AS tag_id,
